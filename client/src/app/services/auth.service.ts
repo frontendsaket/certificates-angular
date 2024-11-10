@@ -78,24 +78,4 @@ export class AuthService{
         this.message = "";
         localStorage.removeItem("auth-token");
     }
-
-    async verifyUser(){
-        const response = await fetch(`${environment.apiUrl}/api/auth/verify`,{
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "auth-token": `${localStorage.getItem("auth-token")}`
-            }
-        })
-
-        const data = await response.json();
-        console.log(data);
-        console.log(localStorage.getItem("auth-token"));
-        if(data.success){
-            this.userLoggedIn = true;
-        }else{
-            this.userLoggedIn = false;
-            localStorage.removeItem("auth-token");
-        }
-    }
 }

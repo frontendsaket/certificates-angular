@@ -35,7 +35,6 @@ export class LoginComponent {
   router = inject(Router);
 
   async onOtp(){
-    console.log(this.email);
     if(!this.utilService.isEmail(this.email)){
       this.error = "Invalid Email!";
       this.resetError();
@@ -71,7 +70,6 @@ export class LoginComponent {
     }
     const reponse = await this.authService.loginUser(this.email, this.otp);
     if(reponse){
-      console.log(reponse);
       this.router.navigate(['/']);
     }else{
       this.error = this.authService.error;

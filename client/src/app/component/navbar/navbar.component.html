@@ -18,9 +18,13 @@
     <div class="hidden md:flex md:items-center md:w-auto w-full" id="menu">
         <nav>
             <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
-                <li><a class="md:p-4 py-3 px-0 block" routerLink="/contact">Contact</a></li>
                 <li><a class="md:p-4 py-3 px-0 block" routerLink="/certificates">Certificates</a></li>
-                <li><a class="md:p-4 py-3 px-0 block" routerLink="/login">Login</a></li>
+                <li><a class="md:p-4 py-3 px-0 block" routerLink="/contact">Contact</a></li>
+                @if(!this.isLoggedIn){
+                    <li><a class="md:p-4 py-3 px-0 block" routerLink="/login">Login</a></li>
+                } @else {
+                    <li><button class="md:p-4 py-3 px-0 block" (click)="handleLogout()">Logout</button></li>
+                }
             </ul>
         </nav>
     </div>

@@ -18,12 +18,12 @@ export class CertificateService{
     activeCertificate: Certificate = this.emptyCertificate;
     
 
-    async getAllCertificates(){
+    async getAllCertificates(token: string){
         try{
             this.isLoading = true;;
             const response = await fetch(`${environment.apiUrl}/api/certificate/all`, {
                 headers: {
-                    "auth-token": `${localStorage.getItem("auth-token")}`
+                    "auth-token": token
                 }
             });
             const data = await response.json();

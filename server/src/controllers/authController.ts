@@ -39,9 +39,7 @@ const loginUser = async (req: Request, res: Response) => {
       return res.json({ error: "Invalid OTP!" });
     }
 
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, {
-      expiresIn: "100h",
-    });
+    const token = jwt.sign({ id: user._id }, JWT_SECRET);
 
     success = true;
     return res.json({ success, info: "Login Successful!!", token: token });

@@ -3,6 +3,7 @@ import { CertificateItemComponent } from "../../component/certificate-item/certi
 import { CertificateService } from '../../services/certificate.service';
 import { Certificate } from '../../app.types';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-certificates',
@@ -14,10 +15,16 @@ import { CommonModule } from '@angular/common';
 export class CertificatesComponent {
 
     certificates: Certificate[] = [];
+    router = inject(Router);
 
     private certificateService = inject(CertificateService);
     ngOnInit(): void {
-        this.certificateService.getAllCertificates().then(certificates => {
+        const token = localStorage.getItem("auth-token");
+        if(!token){
+            this.router.navigate(['/login']);
+            return;
+        }
+        this.certificateService.getAllCertificates(token).then(certificates => {
             this.certificates = certificates;
         });
     }

@@ -19,8 +19,12 @@ const getAllCertificates = async (req: CustomRequest, res: Response) => {
   let success = false;
 
   try {
+    const user = await User.findById(req.user.id);
+    if(!user){
+      return res.json({error: "User Not Found!"});
+    }
 
-    const certificates = await Certificate.find();
+    const certificates = await Certificate.find({recipient: user._id});
 
     success = true;
     return res.json({ success, certificates });
