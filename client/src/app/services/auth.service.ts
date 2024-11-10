@@ -20,24 +20,22 @@ export class AuthService{
         },time)
     }
 
-    async registerUser(name: string, email: string, password: string){
-
-        const response = await fetch(`${environment.apiUrl}/api/auth/register`, {
+    async sendOtp(email: string){
+        const response = await fetch(`${environment.apiUrl}/api/auth/otp`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                name: name,
-                email: email,
-                password: password
+                email: email
             })
-        });
+        })
 
         const data = await response.json();
-        
+
         if(data.success){
             this.message = data.info;
+            localStorage.setItem("auth-token", data.token);
             this.resetMessage();
             return true;
         }else{
@@ -45,10 +43,9 @@ export class AuthService{
             this.resetError();
             return false;
         }
-        
     }
 
-    async loginUser(email: string, password: string){
+    async loginUser(email: string, otp: string){
 
         const response = await fetch(`${environment.apiUrl}/api/auth/login`, {
             method: "POST",
@@ -57,7 +54,7 @@ export class AuthService{
             },
             body: JSON.stringify({
                 email: email,
-                password: password
+                otp: otp
             })
         })
 

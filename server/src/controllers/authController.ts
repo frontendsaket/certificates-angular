@@ -27,13 +27,15 @@ const loginUser = async (req: Request, res: Response) => {
       return res.json({ error: "User Not Found!" });
     }
 
-    const otp = await Otp.findOne({ email: user.email });
+    const otp1 = await Otp.findOne({ email: user.email });
 
-    if (!otp) {
+    if (!otp1) {
       return res.json({ error: "OTP Not Found!" });
     }
 
-    if (otp.otp !== otp) {
+    if (otp1.otp !== otp) {
+      console.log(otp1.otp);
+      console.log(otp);
       return res.json({ error: "Invalid OTP!" });
     }
 
@@ -75,23 +77,25 @@ const sendOtp = async (req: CustomRequest, res: Response) => {
     return res.json({error: "Please enter a valid email"});
   }
 
+
     let email1 = email.toLowerCase();
     if(isEmailValid(email1)){
 
       // check if email is already registered
       const user = await User.findOne({email: email1});
-      if(user){
-        return res.json({error: "Email already registered"});
+      if(!user){
+        return res.json({error: "No User Found!"});
       }
+
+      let otp = Math.floor(100000 + Math.random() * 900000);
 
       // check if otp is already sent
       const gotOtp = await Otp.findOne({email: email1});
       if(gotOtp){
-        return res.json({error: "OTP already sent, check your email!"});
+        otp = gotOtp.otp;
       }
 
       // use nodemailer to send otp
-      const otp = Math.floor(100000 + Math.random() * 900000);
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {

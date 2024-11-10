@@ -22,11 +22,13 @@
             >
             <div class="flex gap-2">
               <input
+                [(ngModel)]="email"
                 class="border rounded-lg px-3 py-2 text-sm w-full outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 placeholder="Enter your email"
                 type="email"
               />
               <button
+                (click)="onOtp()"
                 class="py-2 px-6 bg-blue-500 hover:bg-blue-600 focus:ring-offset-blue-200 text-white sm:w-auto w-full transition ease-in duration-200 text-sm font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg cursor-pointer select-none"
               >
                 Send OTP
@@ -38,6 +40,7 @@
       <div class="w-full flex flex-col gap-2">
         <label class="font-semibold text-xs text-gray-400">OTP</label>
         <input
+          [(ngModel)]="otp"
           type="password"
           class="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none"
           placeholder="••••••••"
@@ -45,10 +48,23 @@
       </div>
       <div className="mt-5">
         <button
+          (click)="onLogin()"
           class="py-1 px-8 bg-blue-500 hover:bg-blue-800 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg cursor-pointer select-none"
         >
           Login
         </button>
+      </div>
+      <div class="mt-4">
+        @if(error){
+            <div class="w-full">
+                <h1 class="text-center text-red-600">{{error}}</h1>
+            </div>
+        }
+        @if(message){
+            <div class="w-full">
+                <h1 class="text-center text-green-600">{{message}}</h1>
+            </div>
+        }
       </div>
     </div>
   </div>
