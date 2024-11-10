@@ -10,5 +10,4 @@ import { ServicesComponent } from "../../component/services/services.component";
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-
 }
