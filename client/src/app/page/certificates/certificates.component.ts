@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CertificateItemComponent } from "../../component/certificate-item/certificate-item.component";
+import { CertificateService } from '../../services/certificate.service';
 
 @Component({
   selector: 'app-certificates',
@@ -10,4 +11,7 @@ import { CertificateItemComponent } from "../../component/certificate-item/certi
 })
 export class CertificatesComponent {
 
+    private certificateService = inject(CertificateService);
+    ngOnInit(): void {
+    }
 }
