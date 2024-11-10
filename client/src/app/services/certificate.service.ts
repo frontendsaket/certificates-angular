@@ -16,31 +16,35 @@ export class CertificateService{
     message = "";
     certificates: Certificate[] = [];
     activeCertificate: Certificate = this.emptyCertificate;
+    
 
     async getAllCertificates(){
         try{
             this.isLoading = true;;
-            const response = await fetch(`${environment.apiUrl}/api/certificate/all`);
+            const response = await fetch(`${environment.apiUrl}/api/certificate/all`, {
+                headers: {
+                    "auth-token": `${localStorage.getItem("auth-token")}`
+                }
+            });
             const data = await response.json();
             if(data.success){
                 this.certificates = data.certificates;
                 this.isLoading = false;
+                return this.certificates;
             }else{
                 this.message = "Unable to fetch certificates";
                 this.isLoading = false;
             }
+            return [];
         }catch(error){
             console.error(error);
+            return [];
         }
     }
 
     async getCertificateById(id: string){
-        this.activeCertificate = this.certificates.find(certificate => certificate._id === id) || this.emptyCertificate;
         try{
             this.isLoading = true;
-            if(this.activeCertificate._id!==""){
-                return this.emptyCertificate;
-            }
             const response = await fetch(`${environment.apiUrl}/api/certificate/get/${id}`);
             const data = await response.json();
             if(data.success){

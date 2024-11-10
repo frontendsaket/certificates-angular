@@ -1,8 +1,6 @@
 <div>
     <h1 class="w-full text-center font-semibold text-3xl my-4">My Certificates</h1>
-    <app-certificate-item></app-certificate-item>
-    <app-certificate-item></app-certificate-item>
-    <app-certificate-item></app-certificate-item>
-    <app-certificate-item></app-certificate-item>
-    <app-certificate-item></app-certificate-item>
+    <div *ngFor="let certificate of certificates">
+        <app-certificate-item [certificate]="certificate"></app-certificate-item>
+    </div>
 </div>

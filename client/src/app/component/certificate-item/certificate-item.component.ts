@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Certificate } from '../../app.types';
 
 @Component({
   selector: 'app-certificate-item',
@@ -9,5 +10,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './certificate-item.component.css'
 })
 export class CertificateItemComponent {
-
+    @Input() certificate!: Certificate;
 }
