@@ -1,14 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { Certificate } from '../../app.types';
+import { RouterModule } from '@angular/router';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-certificate-item',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterModule, CommonModule, DatePipe],
   templateUrl: './certificate-item.component.html',
-  styleUrl: './certificate-item.component.css'
+  styleUrls: ['./certificate-item.component.css']
 })
 export class CertificateItemComponent {
-    @Input() certificate!: Certificate;
+  @Input() certificate!: Certificate;
 }

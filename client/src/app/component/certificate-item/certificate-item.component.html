@@ -1,36 +1,53 @@
 <div class="max-w-2xl mx-auto my-4">
-    <div class="flex gap-3 bg-white border border-gray-300 rounded-xl overflow-hidden items-center justify-start p-4 shadow-md">
+    <div class="group flex gap-4 bg-white border border-gray-200 rounded-xl overflow-hidden items-start p-5 shadow-sm hover:shadow-md transition-all duration-300">
         
         <!-- Certificate Image -->
-        <div class="relative w-24 h-24 flex-shrink-0">
+        <div class="relative w-32 h-32 flex-shrink-0 rounded-lg overflow-hidden">
             <img 
-                class="absolute left-0 top-0 w-full h-full object-cover rounded-md transition duration-50" 
+                class="absolute left-0 top-0 w-full h-full object-cover transition duration-300 group-hover:scale-105" 
                 loading="lazy" 
-                src={{certificate.image}}
-                alt="Certificate Image"
+                [src]="certificate.image"
+                [alt]="certificate.title"
             />
+            <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
         </div>
 
         <!-- Certificate Details -->
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-3 flex-grow min-w-0">
             
             <!-- Certificate Title -->
-            <p class="text-lg font-semibold text-gray-800">{{certificate.title}}</p>
+            <h3 class="text-lg font-semibold text-gray-900 truncate">
+                {{certificate.title}}
+            </h3>
             
             <!-- Certificate Description -->
-            <p class="text-sm text-gray-500">
+            <p class="text-sm text-gray-600 line-clamp-2 leading-relaxed">
                 {{certificate.description}}
             </p>
             
             <!-- Certificate Link -->
-            <span class="flex items-center text-gray-500">
-                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path>
-                </svg>
-                <a [routerLink]="['/certificate']" [queryParams]="{ certificateId: certificate._id }" class="hover:underline">
-                    View Certificate
-                </a>                  
-            </span>
+            <div class="flex items-center justify-between mt-auto">
+                <a [routerLink]="['/certificate']" 
+                   [queryParams]="{ certificateId: certificate._id }" 
+                   class="inline-flex items-center text-sm text-indigo-600 hover:text-indigo-700 transition-colors group">
+                    <span>View Certificate</span>
+                    <svg class="w-4 h-4 ml-1 transform transition-transform group-hover:translate-x-1" 
+                         fill="none" 
+                         stroke="currentColor" 
+                         viewBox="0 0 24 24">
+                        <path stroke-linecap="round" 
+                              stroke-linejoin="round" 
+                              stroke-width="2" 
+                              d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                
+                <!-- Date if available -->
+                <span *ngIf="certificate.issueDate" 
+                      class="text-xs text-gray-500">
+                    Issued: {{certificate.issueDate | date:'mediumDate'}}
+                </span>
+            </div>
         </div>
 
     </div>
