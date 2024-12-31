@@ -1,0 +1,165 @@
+.hero-container {
+    min-height: calc(100vh - 64px);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Simplify content glass effect */
+.content-glass {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 1rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+/* Enhance text contrast */
+.content-glass h1 {
+    color: #1a202c; /* darker gray for better contrast */
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.content-glass p {
+    color: #2d3748; /* darker gray for better contrast */
+}
+
+/* Make background shapes more visible */
+.hero-container::before,
+.hero-container::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.25;
+    z-index: -1;
+    animation: float 10s infinite ease-in-out;
+}
+
+.hero-container::before {
+    background: #a8b2d1;
+    top: -100px;
+    left: -100px;
+}
+
+.hero-container::after {
+    background: #8892b0;
+    bottom: -100px;
+    right: -100px;
+    animation-delay: -5s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(30px, 30px);
+    }
+}
+
+/* Base animations */
+.animate-fade-in-up {
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+}
+
+.animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+.animate-slide-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.8s ease forwards;
+}
+
+/* Animation delays */
+.animation-delay-200 {
+    animation-delay: 0.2s;
+}
+
+.animation-delay-400 {
+    animation-delay: 0.4s;
+}
+
+.animation-delay-600 {
+    animation-delay: 0.6s;
+}
+
+/* Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive text adjustments */
+@media (max-width: 640px) {
+    h1 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+    p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+}
+
+@media (min-width: 1536px) {
+    h1 {
+        font-size: 4.5rem;
+        line-height: 1;
+    }
+    p {
+        font-size: 1.25rem;
+        line-height: 1.75;
+    }
+    .hero-container {
+        min-height: calc(100vh - 80px);
+    }
+}
+
+/* Hover effects */
+.hero-container a {
+    transition: all 0.3s ease;
+}
+
+.hero-container a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Ensure smooth transitions */
+* {
+    transition: font-size 0.3s ease, line-height 0.3s ease;
+}

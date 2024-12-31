@@ -1,0 +1,204 @@
+/* Smooth transitions */
+.nav-link {
+    transition: all 0.3s ease;
+}
+
+/* Underline animation */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #4B5563; /* gray-600 */
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 80%;
+}
+
+/* Mobile menu animation */
+#menu-toggle:checked + #menu {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Logo hover effect */
+img {
+    transition: transform 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+
+/* Active link style */
+.active {
+    color: #1F2937; /* gray-800 */
+    font-weight: 500;
+}
+
+/* Mobile menu styles */
+@media (max-width: 768px) {
+    #menu-toggle:checked + #menu {
+        display: block;
+    }
+    
+    nav ul {
+        background-color: #F9FAFB; /* gray-50 */
+        border-radius: 0.5rem;
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+}
+
+/* Navbar slide-in animation on load */
+header {
+    animation: slideInDown 0.5s ease-out;
+}
+
+@keyframes slideInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Glass effect */
+header {
+    background: rgba(249, 250, 251, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Logo animations */
+.logo-container {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Nav links animations */
+nav ul li {
+    opacity: 0;
+    animation: slideInRight 0.5s ease-out forwards;
+}
+
+nav ul li:nth-child(1) { animation-delay: 0.2s; }
+nav ul li:nth-child(2) { animation-delay: 0.3s; }
+nav ul li:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Mobile menu improvements */
+@media (max-width: 768px) {
+    #menu-toggle:checked + #menu {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    #menu {
+        background: rgba(249, 250, 251, 0.95);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-radius: 0 0 1rem 1rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin-top: 0.5rem;
+    }
+
+    nav ul {
+        padding: 1rem;
+    }
+
+    nav ul li {
+        margin: 0.5rem 0;
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+}
+
+/* Responsive text sizing */
+@media (min-width: 1536px) {
+    .nav-link {
+        font-size: 1.125rem;
+    }
+    img {
+        height: 3rem;
+    }
+}
+
+@media (max-width: 640px) {
+    img {
+        height: 2.25rem;
+    }
+}
+
+/* Hover effects for nav links */
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #4B5563;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 80%;
+}
+
+/* Mobile menu animation */
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

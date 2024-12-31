@@ -1,13 +1,13 @@
-<header class="lg:px-16 px-4 bg-white flex flex-wrap items-center py-1 shadow-md">
-    <div class="flex-1 flex justify-between items-center">
-        <a routerLink="/" class="text-xl font-bold text-blue-600">
-            <img src="/assets/logo.png" class="h-10" />
+<header class="lg:px-16 px-4 bg-gray-50/80 flex flex-wrap items-center py-1 shadow-md fixed w-full top-0 z-50">
+    <div class="flex-1 flex justify-between items-center logo-container">
+        <a routerLink="/" class="text-xl font-bold text-gray-800 hover:opacity-80 transition-opacity">
+            <img src="/assets/logo.png" class="h-10 transition-transform" alt="Logo" />
         </a>
     </div>
 
     <!-- Mobile Menu Toggle -->
     <label for="menu-toggle" class="pointer-cursor md:hidden block">
-        <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+        <svg class="fill-current text-gray-700 hover:text-gray-900 transition-colors" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
             <title>menu</title>
             <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
         </svg>
@@ -17,15 +17,26 @@
     <!-- Desktop Menu -->
     <div class="hidden md:flex md:items-center md:w-auto w-full" id="menu">
         <nav>
-            <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
-                <li><a class="md:p-4 py-3 px-0 block" routerLink="/certificates">Certificates</a></li>
-                <li><a class="md:p-4 py-3 px-0 block" routerLink="/contact">Contact</a></li>
+            <ul class="md:flex items-center justify-between text-base text-gray-600 pt-4 md:pt-0">
+                <li>
+                    <a class="md:p-4 py-3 px-0 block hover:text-gray-900 nav-link" routerLink="/certificates" routerLinkActive="active">Certificates</a>
+                </li>
+                <li>
+                    <a class="md:p-4 py-3 px-0 block hover:text-gray-900 nav-link" routerLink="/contact" routerLinkActive="active">Contact</a>
+                </li>
                 @if(!this.isLoggedIn){
-                    <li><a class="md:p-4 py-3 px-0 block" routerLink="/login">Login</a></li>
+                    <li>
+                        <a class="md:p-4 py-3 px-0 block hover:text-gray-900 nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+                    </li>
                 } @else {
-                    <li><button class="md:p-4 py-3 px-0 block" (click)="handleLogout()">Logout</button></li>
+                    <li>
+                        <button class="md:p-4 py-3 px-0 block hover:text-gray-900 nav-link" (click)="handleLogout()">Logout</button>
+                    </li>
                 }
             </ul>
         </nav>
     </div>
 </header>
+
+<!-- Spacer to prevent content from hiding under fixed navbar -->
+<div class="h-16"></div>
