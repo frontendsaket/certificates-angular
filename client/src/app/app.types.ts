@@ -10,6 +10,7 @@ interface Certificate{
     recipient: any;
     _id: string;
     issueDate: Date;
+    category: string;
 }
 
 interface Otp{

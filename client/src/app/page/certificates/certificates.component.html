@@ -10,6 +10,8 @@
     <div class="mb-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0" scrollAnimation>
       <div class="relative">
         <input type="text" 
+               [(ngModel)]="searchTerm"
+               (input)="searchCertificates($event)"
                placeholder="Search certificates..." 
                class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
         <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -17,23 +19,34 @@
         </svg>
       </div>
       <div class="flex space-x-4">
-        <select class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+        <select [(ngModel)]="selectedCategory" 
+                (change)="filterByCategory($event)"
+                class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
           <option>All Categories</option>
           <option>Technical</option>
           <option>Professional</option>
           <option>Academic</option>
         </select>
-        <select class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+        <select [(ngModel)]="selectedSort"
+                (change)="sortCertificates($event)"
+                class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
           <option>Sort by Date</option>
           <option>Sort by Name</option>
-          <option>Sort by Category</option>
         </select>
       </div>
     </div>
 
-    <!-- Certificates Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div *ngFor="let certificate of certificates; let i = index" 
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="flex justify-center items-center py-20" scrollAnimation>
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p class="mt-4 text-gray-600">Loading certificates...</p>
+      </div>
+    </div>
+
+    <!-- Certificates Grid - Update to use filteredCertificates -->
+    <div *ngIf="!isLoading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div *ngFor="let certificate of filteredCertificates; let i = index" 
            class="certificate-card" 
            scrollAnimation 
            [style.animation-delay]="i * 0.1 + 's'">
@@ -41,15 +54,19 @@
       </div>
     </div>
 
-    <!-- Empty State -->
-    <div *ngIf="certificates.length === 0" 
+    <!-- Empty State - Update conditions -->
+    <div *ngIf="!isLoading && filteredCertificates.length === 0" 
          class="text-center py-12 bg-white rounded-lg shadow-sm" 
          scrollAnimation>
       <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
       </svg>
-      <h3 class="mt-2 text-sm font-medium text-gray-900">No certificates</h3>
-      <p class="mt-1 text-sm text-gray-500">Get started by earning your first certificate.</p>
+      <h3 class="mt-2 text-sm font-medium text-gray-900">
+        {{ searchTerm ? 'No certificates found matching your search' : 'No certificates available' }}
+      </h3>
+      <p class="mt-1 text-sm text-gray-500">
+        {{ searchTerm ? 'Try adjusting your search terms' : 'Get started by earning your first certificate' }}
+      </p>
     </div>
   </div>
 </div>
