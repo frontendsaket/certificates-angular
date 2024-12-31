@@ -2,11 +2,13 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CertificateService } from '../../services/certificate.service';
 import { Certificate } from '../../app.types';
+import { DatePipe } from '@angular/common';
+import { ScrollAnimationDirective } from '../../shared/directives/scroll-animation.directive';
 
 @Component({
   selector: 'app-certificate',
   standalone: true,
-  imports: [],
+  imports: [ScrollAnimationDirective, DatePipe],
   templateUrl: './certificate.component.html',
   styleUrl: './certificate.component.css'
 })

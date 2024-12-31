@@ -9,6 +9,7 @@ interface Certificate{
     image: string;
     recipient: any;
     _id: string;
+    issueDate: Date;
 }
 
 interface Otp{

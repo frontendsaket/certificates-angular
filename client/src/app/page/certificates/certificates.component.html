@@ -1,6 +1,55 @@
-<div>
-    <h1 class="w-full text-center font-semibold text-3xl my-4">My Certificates</h1>
-    <div *ngFor="let certificate of certificates">
-        <app-certificate-item [certificate]="certificate"></app-certificate-item>
+<div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header Section -->
+    <div class="text-center mb-12" scrollAnimation>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">My Certificates</h1>
+      <p class="text-lg text-gray-600">View and manage all your earned certificates</p>
     </div>
+
+    <!-- Filters and Search (Optional) -->
+    <div class="mb-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0" scrollAnimation>
+      <div class="relative">
+        <input type="text" 
+               placeholder="Search certificates..." 
+               class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+        <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+      </div>
+      <div class="flex space-x-4">
+        <select class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+          <option>All Categories</option>
+          <option>Technical</option>
+          <option>Professional</option>
+          <option>Academic</option>
+        </select>
+        <select class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+          <option>Sort by Date</option>
+          <option>Sort by Name</option>
+          <option>Sort by Category</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Certificates Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div *ngFor="let certificate of certificates; let i = index" 
+           class="certificate-card" 
+           scrollAnimation 
+           [style.animation-delay]="i * 0.1 + 's'">
+        <app-certificate-item [certificate]="certificate"></app-certificate-item>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="certificates.length === 0" 
+         class="text-center py-12 bg-white rounded-lg shadow-sm" 
+         scrollAnimation>
+      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+      </svg>
+      <h3 class="mt-2 text-sm font-medium text-gray-900">No certificates</h3>
+      <p class="mt-1 text-sm text-gray-500">Get started by earning your first certificate.</p>
+    </div>
+  </div>
 </div>
