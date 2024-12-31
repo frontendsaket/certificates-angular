@@ -27,10 +27,10 @@ A modern, secure platform for managing digital certificates with blockchain veri
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/certificate-platform.git
+git clone https://github.com/whysosaket/certificates-angular.git
 
 # Install dependencies
-cd certificate-platform
+cd certificates-angular
 npm install
 
 # Start development server
